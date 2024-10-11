@@ -1,0 +1,11 @@
+#Rolling sum with a window length of 100 observations, and take the mean (From pandas library)
+df['SMA100'] = df['Close'].rolling(window=50).mean()
+
+#Identify Buy and Sell signals
+df['Signal'] = 0  # Default to no signal
+df.loc[df['Close'] > df['SMA100'], 'Signal'] = 1  # When closing price is higher than SMA, set signal 1
+df.loc[df['Close'] < df['SMA100'], 'Signal'] = -1  # When closing price is lower than SMA, set signal -1
+df['Position'] = df['Signal'] - df['Signal'].shift(1)  # Determine where the position changes
+#Buy signals occur when Position is 2 (crossing from signal -1 to 1), sell signals when Position is -2 (crossing from 1 to -1)
+buy_signals = df[df['Position'] == 2]
+sell_signals = df[df['Position'] == -2]
