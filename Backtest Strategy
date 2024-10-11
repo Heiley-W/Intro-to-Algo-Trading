@@ -1,0 +1,16 @@
+# Initialize variables
+cash = 10000  # Starting cash
+shares = 0
+
+# Simulate trading
+for index, row in df.iterrows():
+    if row['Position'] == 2:  # Buy signal
+        shares = cash // row['Close']
+        cash -= shares * row['Close']
+    elif row['Position'] == -2:  # Sell signal
+        cash += shares * row['Close']
+        shares = 0
+
+# Final earnings
+final_value = cash + shares * df.iloc[-1]['Close']
+print(f"Final earnings: ${final_value:.2f}")
