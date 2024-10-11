@@ -1,0 +1,12 @@
+# Plot the data
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(5, 5))
+plt.plot(df['Close'], label='Price', color='black', alpha=1)
+plt.plot(df['SMA100'], label='SMA100', color='red', alpha=0.5)
+plt.scatter(buy_signals.index, buy_signals['Close'], marker='^', color='green', label='Buy Signal', alpha=1, s=100)
+plt.scatter(sell_signals.index, sell_signals['Close'], marker='v', color='red', label='Sell Signal', alpha=1, s=100)
+plt.title('Moving Average Crossover Trading Strategy')
+plt.xlabel('Date')
+plt.ylabel('Price')
+plt.legend()
